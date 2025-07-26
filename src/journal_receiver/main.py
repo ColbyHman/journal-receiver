@@ -9,7 +9,6 @@ import os
 import aiofiles
 from pathlib import Path
 
-from typing import Optional
 import logging
 from datetime import datetime
 import uuid
@@ -21,7 +20,7 @@ app = FastAPI(title="Journal Receiver", version="1.0.0")
 
 load_dotenv()
 
-N8N_WEBHOOK_URL = os.getenv("N8N_WEBHOOK_URL")
+N8N_WEBHOOK_URL = os.getenv("N8N_WEBHOOK_URL", "")
 UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER", "./uploads")
 MAX_FILE_SIZE = int(os.getenv("MAX_FILE_SIZE", "50")) * 1024 * 1024  # 50MB default
 FORWARD_API_TIMEOUT = int(os.getenv("FORWARD_API_TIMEOUT", "30"))
@@ -53,8 +52,8 @@ async def upload_audio(request: Request):
     async with httpx.AsyncClient(timeout=FORWARD_API_TIMEOUT, verify=ssl_context) as client:
         try:
             files = {
-            "file": (filename, contents, "audio/mp4")
-        }
+                "file": (filename, contents, "audio/mp4")
+            }
             response = await client.post(
                 N8N_WEBHOOK_URL,
                 files=files,
@@ -69,7 +68,6 @@ async def upload_audio(request: Request):
         "message": "Raw file uploaded successfully",
         "filename": filename,
         "size_bytes": len(contents),
-        "saved_path": file_path,
     }
 
 @app.get("/health")
