@@ -1,0 +1,17 @@
+services:
+  journal_receiver:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./uploads:/app/src/journal_receiver/uploads
+    environment:
+      UPLOAD_FOLDER: "/app/src/journal_receiver/uploads"
+      FORWARD_API_URL: ""
+      FORWARD_API_TIMEOUT: "30"
+      MAX_FILE_SIZE: "50"
+      PYTHONUNBUFFERED: "1"
+
+volumes:
+  uploads_data:

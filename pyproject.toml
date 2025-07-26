@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "journal-receiver"
+version = "1.0.0"
+description = "FastAPI service for audio file uploads with optional forwarding"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "Colby Hillman", email = "colby.hillman@gmail.com"},
+]
+dependencies = [
+    "aiofiles",
+    "annotated-types",
+    "anyio",
+    "certifi",
+    "click",
+    "fastapi",
+    "h11",
+    "httpcore",
+    "httpx",
+    "idna",
+    "mangum",
+    "pydantic",
+    "pydantic-core",
+    "pydub",
+    "python-multipart",
+    "sniffio",
+    "starlette",
+    "typing-extensions",
+    "typing-inspection",
+    "uvicorn",
+]
+
+[tool.hatch.build]
+sources = ["src"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/journal_receiver"]
+
+[project.scripts]
+local = "journal_receiver.main:run"
+
