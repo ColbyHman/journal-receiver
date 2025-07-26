@@ -7,10 +7,11 @@ services:
       - ./src:/app/src
       - ./uploads:/app/src/journal_receiver/uploads
     environment:
-      UPLOAD_FOLDER: "/app/src/journal_receiver/uploads"
-      FORWARD_API_URL: ""
-      FORWARD_API_TIMEOUT: "30"
-      MAX_FILE_SIZE: "50"
+      UPLOAD_FOLDER: ${UPLOAD_FOLDER}
+      N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL}
+      FORWARD_API_TIMEOUT: ${FORWARD_API_TIMEOUT}
+      MAX_FILE_SIZE: ${MAX_FILE_SIZE}
+      SAVE_LOCAL: ${SAVE_LOCAL}
       PYTHONUNBUFFERED: "1"
     restart: unless-stopped
 
