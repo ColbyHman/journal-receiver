@@ -12,6 +12,7 @@ services:
       FORWARD_API_TIMEOUT: "30"
       MAX_FILE_SIZE: "50"
       PYTHONUNBUFFERED: "1"
+    restart: unless-stopped
 
 volumes:
   uploads_data:
