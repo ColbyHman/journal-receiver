@@ -26,6 +26,7 @@ dependencies = [
     "pydantic",
     "pydantic-core",
     "pydub",
+    "python-dotenv>=1.1.1",
     "python-multipart",
     "sniffio",
     "starlette",
